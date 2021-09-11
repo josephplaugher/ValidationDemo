@@ -1,10 +1,9 @@
 const dotenv = require('dotenv').config()
 const express = require('express')
 const app = express()
+const path = require('path')
 
 app.use(express.static('public'))
-app.set('view engine', 'ejs')
-app.set('views', './src/views')
 
 let port = process.env.PORT
 app.listen(port, function () {
@@ -22,5 +21,5 @@ app.use((req, res, next) => {
 })
 
 app.all('/*', (req, res) => {
-	res.render('index')
+	res.sendFile(path.join(__dirname + './../views/index.html'));
 })
