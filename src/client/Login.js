@@ -5,14 +5,14 @@ import Validator from './Validation/Validator'
 import ValRules from './Validation/ValRules'
 
 const Login = (props) => {
-    const [email, updateEmail] = useState('')
+    const [name, updateName] = useState('')
     const [password, updatePassword] = useState('')
-    const [error, updateError] = useState({ email: '', password: '' })
+    const [error, updateError] = useState({ name: '', password: '' })
 
     const validate = (event) => {
         event.preventDefault()
         // create a new validation object using all the input values as an object with ES6 shorthand, and the valRules object
-        const valResult = new Validator({ email, password }, ValRules)
+        const valResult = new Validator({ name: name, password: password }, ValRules)
         // checck valResult (this object stores the result of the validation process) to see if there are any error. 
         // submit the form if there are none. If there are errors, submit the form with ajax
         if (valResult.hasError == false) {
@@ -29,7 +29,7 @@ const Login = (props) => {
         <div id="main">
             <h3>Sign In</h3>
             <form onSubmit={validate} >
-                <Input label="Email" name="email" value={email} onChange={(e) => { updateEmail(e.target.value) }} error={error.email} />
+                <Input label="Name" name="name" value={name} onChange={(e) => { updateName(e.target.value) }} error={error.name} />
                 <Input label="Password" name="password" type="password" value={password} onChange={(e) => { updatePassword(e.target.value) }} error={error.password} />
                 <Button label="Sign In" />
             </form>

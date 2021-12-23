@@ -11,7 +11,7 @@ const ValRules = [
         }
     },
     {
-        name: 'fname',
+        name: 'name',
         required: true,
         alphanumeric: 'true',
         customErrMsg: 'This is a custom first name error message',
