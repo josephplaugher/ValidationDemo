@@ -28,15 +28,8 @@ class Validate {
         }
         //check for correct date format
         if (rule.dateFormat && val != null) {
-            /*
-            This logic is here instead of in its own function because it checks and returns two different errors intead of
-            just returning true or false
-            Check if the date range is valid (no error if the data is after '1900' and entire string is no more than 10 characters). 
-            Prevents entering '0021' instead of '2021', and prevents entering a 5 digit year.
-            */
-            parseInt(moment(val).year()) < 1900 || val.length > 10 ? this.setErrorMessage(name, 'Invalid year format') :
-                // check if the data format is valid (doesn't check for year range constraint I.E. '0021')
-                moment(val).format() ? true : this.setErrorMessage(name, 'Invalid date format')
+            //I simplified this check and moved it into its own function
+            this.isValidDate(val) ? true : this.setErrorMessage(name, 'Invalid date format')
             return 0; //stop the function for this input and return this error
         }
         //check that custom matching expressions are met
@@ -166,6 +159,10 @@ class Validate {
         return true;
     }
 
+    isValidDate(val) {
+        return moment(val).format() == 'Invalid date' ? false : true
+    }
+
     isError() {
         // Check if the error object contains values
         if (Object.keys(this.error).length === 0) {
@@ -186,3 +183,4 @@ class Validate {
 }
 
 export default Validate;
+
